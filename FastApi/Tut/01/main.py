@@ -15,3 +15,17 @@ def get_users(user_id: int):
 @app.get("/search")
 def search_user(name: str, age: int=18):
     return {"name": name, "age": age}
+
+#Post request
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    email: str
+
+@app.post("/users")
+def create_user(user: User):
+    return {
+        "message": "User created successfully",
+        "data": user
+    }
