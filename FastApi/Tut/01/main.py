@@ -5,3 +5,13 @@ app = FastAPI()
 @app.get('/')
 def read_root():
     return {"message": "Hello Samaresh 🚀"}
+
+#Path Parameters
+@app.get("/users/{user_id}")
+def get_users(user_id: int):
+    return { "user_id": user_id }
+
+#Query Parameters
+@app.get("/search")
+def search_user(name: str, age: int=18):
+    return {"name": name, "age": age}
