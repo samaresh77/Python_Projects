@@ -1,11 +1,16 @@
-# ATM Machine
+current_balance = int(input("Enter your current balance: "))
+withdrawal_amount = int(input("Enter your withdrawal amount: "))
 
-current_balance = int(input("Enter your current amount: "))
-Withdrawal_amount = int(input("Enter your withdrawal amount: "))
-
-if current_balance < 1:
+if withdrawal_amount <= 0:
     print("Withdrawal amount must be greater than 0")
-elif current_balance < Withdrawal_amount:
+
+elif withdrawal_amount > current_balance:
     print("Withdrawal amount cannot be greater than current balance")
+
 else:
-    print(f"Current balance: {current_balance}\nWithdrawal amount: {Withdrawal_amount}\nWithdrawal successful\nRemaining balance: {current_balance-Withdrawal_amount}")
+    remaining_balance = current_balance - withdrawal_amount
+
+    print(
+        f"Withdrawal successful\n"
+        f"Remaining balance: {remaining_balance}"
+    )

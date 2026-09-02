@@ -7,13 +7,13 @@ else:
     print("Odd")
 
 # Age category
-number = int(input("Enter a number: "))
+age = int(input("Enter a number: "))
 
-if number < 13:
+if age < 13:
     print("Child")
-elif number >= 13 and number <= 19:
+elif age <= 19:
     print("Teenager")
-elif number >= 20 and number <= 59:
+elif age <= 59:
     print("Adult")
 else:
     print("Senior")
@@ -32,10 +32,10 @@ else:
 
 # corporate access
 # roles = ["admin", "manager", "employee"]
-role = input("Enter your role: ")
+role = input("Enter your role: ").lower()
 if role in ["admin", "manager"]:
     print("Full access")
-elif role in ["employee"]:
+elif role == "employee":
     print("Limited access")
 else:
     print("Access denied")
