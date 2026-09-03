@@ -42,38 +42,48 @@ for user in users:
 # Mini ATM
 balance = 5000
 
-option = 0
-
-while option != 4:
+while True:
     print(
-            f"Choose your options below:\n"
-            f"1: Check Balance\n"
-            f"2: Deposite\n"
-            f"3: Withdraw\n"
-            f"4: Exit"
-        )
-    option = int(input("Enter a number: "))
-    if option < 1 or option > 4:
-        print("Choose the correct option from 1 to 4 \n")
-    elif option == 1:
-        print(f"Your balance is {balance}\n")
+        "\nChoose an option below:"
+        "\n1. Check Balance"
+        "\n2. Deposit"
+        "\n3. Withdraw"
+        "\n4. Exit"
+    )
+
+    option = int(input("Enter an option: "))
+
+    if option == 1:
+        print(f"Your balance is: {balance}")
+
     elif option == 2:
-        add_balance = int(input("Enter amount to deposite: "))
-        if add_balance <= 0:
-            print("Deposite amount must be greater than 0\n")
+        deposit_amount = int(input("Enter amount to deposit: "))
+
+        if deposit_amount <= 0:
+            print("Deposit amount must be greater than 0.")
         else:
-            balance += add_balance
-            print(f"Your Current balance is {balance}\n")
+            balance += deposit_amount
+            print(f"Deposit successful! Current balance: {balance}")
+
     elif option == 3:
-        withdraw = int(input("Enter amount to withdraw: "))
-        if withdraw <= 0:
-            print("Withdraw Amount must be greater than 0\n")
-        elif withdraw > balance:
-            print("Insuficient fund\n")
+        withdrawal_amount = int(input("Enter amount to withdraw: "))
+
+        if withdrawal_amount <= 0:
+            print("Withdrawal amount must be greater than 0.")
+
+        elif withdrawal_amount > balance:
+            print("Insufficient funds.")
+
         else:
-            balance -= withdraw
+            balance -= withdrawal_amount
             print(
-                    f"Withdrawl Successful!"
-                    f"Remaining balance {balance}\n"
-                )
-    
+                f"Withdrawal successful!\n"
+                f"Remaining balance: {balance}"
+            )
+
+    elif option == 4:
+        print("Thank you for using the ATM!")
+        break
+
+    else:
+        print("Please choose a valid option between 1 and 4.")
