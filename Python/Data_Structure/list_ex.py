@@ -8,8 +8,18 @@ print(users)
 print(len(users))
 
 # 2
+users = ["alice", "bob", "robert"]
+users = [u.capitalize() for u in users]
+print(users)
+users = ["mary jane", "bob", "robert"]
+users = [u.title() for u in users]
+print(users)
+
 users = ["John", "Alice", "Bob", "David"]
-user = input("Enter name to find out: ")
+
+user = input("Enter name to find: ").strip().lower()
+
+users = [name.lower() for name in users]
 
 if user in users:
     print("User found")
