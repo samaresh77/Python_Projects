@@ -1,0 +1,4 @@
+Python File Handling
+I am learning Python.
+I will become a Python developer.
+I am learning FastAPI next.
