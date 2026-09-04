@@ -1,12 +1,25 @@
 users = []
 
+
 def add_user():
     name = input("Enter name to add: ")
-    age = int(input("Enter age: "))
+
+    if not name.strip():
+        raise ValueError("Name cannot be empty.")
+
+    try:
+        age = int(input("Enter age: "))
+    except ValueError:
+        raise ValueError("Age must be a number.")
+
+    if age <= 0:
+        raise ValueError("Age must be greater than 0.")
+
     user = {
-        'name': name,
-        'age': age
+        "name": name,
+        "age": age
     }
+
     users.append(user)
     print("User added!")
 
@@ -21,6 +34,9 @@ def view_users():
 
 def search_user():
     name = input("Enter name to search: ")
+
+    if not name.strip():
+        raise ValueError("Name cannot be empty.")
 
     found = False
 
