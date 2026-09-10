@@ -6,3 +6,6 @@
 
 # Activating the Environment on Mac
 # source .venv/bin/activate
+
+# Installing Packages
+# pip install fastapi
