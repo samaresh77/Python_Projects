@@ -1,0 +1,4 @@
+psycopg==3.3.5
+psycopg-binary==3.3.5
+SQLAlchemy==2.0.54
+typing_extensions==4.16.0
