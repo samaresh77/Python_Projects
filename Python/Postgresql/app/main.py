@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 
-from app.database import engine
+from app.database import Base, engine
+from app.models import User
 
 app = FastAPI()
+
+
+Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
@@ -15,7 +19,7 @@ def root():
 @app.get("/db-test")
 def database_test():
     try:
-        with engine.connect() as connection:
+        with engine.connect():
             return {
                 "message": "Database connection successful"
             }
