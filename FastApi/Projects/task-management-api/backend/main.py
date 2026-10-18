@@ -14,6 +14,27 @@ class TaskCreate(BaseModel):
     status: str = "pending"
     priority: str = "medium"
 
+class TaskUpdate(BaseModel):
+    title: str = Field(min_length=3, max_length=100)
+    description: str = Field(min_length=5, max_length=500)
+    status: str
+    priority: str
+
+class TaskPatch(BaseModel):
+    title: str | None = Field(
+        default=None,
+        min_length=3,
+        max_length=100
+    )
+
+    description: str | None = Field(
+        default=None,
+        min_length=5,
+        max_length=500
+    )
+
+    status: str | None = None
+    priority: str | None = None
 
 @app.get("/")
 def home():
@@ -58,24 +79,69 @@ def get_task(task_id: int):
 
 
 @app.put("/api/v1/tasks/{task_id}")
-def update_task(task_id: int):
-    return {
-        "message": "Update task",
-        "task_id": task_id
-    }
+def update_task(task_id: int, task_data: TaskUpdate):
+
+    for index, task in enumerate(tasks):
+
+        if task["id"] == task_id:
+
+            updated_task = {
+                "id": task_id,
+                **task_data.model_dump()
+            }
+
+            tasks[index] = updated_task
+
+            return {
+                "message": "Task updated successfully",
+                "task": updated_task
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail="Task not found"
+    )
 
 
 @app.patch("/api/v1/tasks/{task_id}")
-def patch_task(task_id: int):
-    return {
-        "message": "Partially update task",
-        "task_id": task_id
-    }
+def patch_task(task_id: int, task_data: TaskPatch):
+
+    for task in tasks:
+
+        if task["id"] == task_id:
+
+            update_data = task_data.model_dump(
+                exclude_unset=True
+            )
+
+            task.update(update_data)
+
+            return {
+                "message": "Task partially updated",
+                "task": task
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail="Task not found"
+    )
 
 
 @app.delete("/api/v1/tasks/{task_id}")
 def delete_task(task_id: int):
-    return {
-        "message": "Delete task",
-        "task_id": task_id
-    }
+
+    for index, task in enumerate(tasks):
+
+        if task["id"] == task_id:
+
+            deleted_task = tasks.pop(index)
+
+            return {
+                "message": "Task deleted successfully",
+                "task": deleted_task
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail="Task not found"
+    )
